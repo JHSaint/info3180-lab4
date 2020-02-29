@@ -87,6 +87,18 @@ def get_uploaded_images():
                 pics.append(os.path.join(check, file))
     return pics
 
+def get_uploaded_images():
+    rootdir = os.getcwd()
+    #print rootdir 
+
+    pics = []
+    for subdir, dirs, files in os.walk(app.config['UPLOAD_FOLDER']):
+        for f in files:
+            f_name, f_ext = os.path.splitext(f)
+            if f_ext in [".png",".jpg"]:
+                pics.append('uploads/' + f)
+    return pics
+
 
 
 @app.route('/files')
@@ -94,8 +106,8 @@ def files():
     if not session.get('logged_in'):
         abort(401)
 
-    image = get_uploaded_images()
-    return render_template('files.html', images=image)
+    imgs = get_uploaded_images()
+    return render_template('files.html', images=imgs)
 
 ###
 # The functions below should be applicable to all Flask apps.

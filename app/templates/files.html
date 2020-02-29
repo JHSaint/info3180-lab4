@@ -4,9 +4,11 @@
 <h1 class="page-header">Files</h1>
 <div class="container">
     <div class="row row-cols-3">
-        {% for img in imgs %}
+        {% for img in images %}
         <div class="col-4">
+
             <img class="photo" src="{{ url_for('static', filename=img) }}">
+
         </div>
         {% endfor %}
     </div>
